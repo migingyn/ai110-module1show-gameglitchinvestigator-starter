@@ -17,7 +17,7 @@ The game was set on normal mode as a default, where you input a value and only a
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
-I used Claude for this project. I used Claude to help explain the parsing that happens in the try except block in app.py, and utilized its suggestion to fix the parsing from str to int, so that the hints are accurate according to user input.
+I used Claude for this project. I used Claude to help explain the parsing that happens in the try except block in app.py, and utilized its suggestion of parsing from str to int, so that the hints are accurate according to user input. I verified by running some manual tests on the localhost and they have been correct so far. One incorrect suggestion was for the proper decrement and resulting UI change for attempts left, where although the attempts left matched the attempts allowed, the attempts list would fill up before attempts left became 0. The suggestion was to add feedback and force the attempts to rerender, and I just did a couple tests which all failed.
 
 ---
 
