@@ -84,7 +84,6 @@ attempt_limit_map = {
     "Hard": 5,
 }
 
-# FIXME: Logic breaks here
 attempt_limit = attempt_limit_map[difficulty]
 
 low, high = get_range_for_difficulty(difficulty)
@@ -160,9 +159,12 @@ with col3:
 
 # FIXME: Logic breaks here
 if new_game:
-    st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
-    st.success("New game started.")
+    st.session_state.attempts = 1
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.feedback = None
     st.rerun()
 
 if st.session_state.status != "playing":
@@ -172,7 +174,6 @@ if st.session_state.status != "playing":
         st.error("Game over. Start a new game to try again.")
     st.stop()
 
-# FIXME: Logic breaks here
 if submit:
     st.session_state.attempts += 1
 
