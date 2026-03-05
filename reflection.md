@@ -8,6 +8,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
+The game was set on normal mode as a default, where you input a value and only a value, no other inputs would work. The game gives you a hint and you continue until you guess correctly. The hint was incorrect relative to the secret value, as I had a secret value of 13, yet my hint told me to go lower than 11, expected to say "Go higher". The new game button doesn't function properly, you have to reload in order to play a new game rather than it restarting all in one session. Also, when you first run the game, the "Attempts" text stays the same number rather than decreasing until you attempt a new value.
 ---
 
 ## 2. How did you use AI as a teammate?
@@ -15,6 +16,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+
+I used Claude for this project. I used Claude to help explain the parsing that happens in the try except block in app.py, and utilized its suggestion to fix the parsing from str to int, so that the hints are accurate according to user input.
 
 ---
 
