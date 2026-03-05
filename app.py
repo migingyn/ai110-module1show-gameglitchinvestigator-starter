@@ -157,7 +157,6 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
-# FIXME: Logic breaks here
 if new_game:
     st.session_state.attempts = 1
     st.session_state.secret = random.randint(low, high)
@@ -185,12 +184,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
-
-        outcome, message = check_guess(guess_int, secret)
+        outcome, message = check_guess(guess_int, st.session_state.secret)
 
         st.session_state.score = update_score(
             current_score=st.session_state.score,
