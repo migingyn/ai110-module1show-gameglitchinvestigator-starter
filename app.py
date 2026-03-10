@@ -76,7 +76,7 @@ if st.session_state.feedback:
 
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
-    st.write("Attempts:", st.session_state.attempts)
+    st.write("Attempts:", st.session_state.attempts - 1)
     st.write("Score:", st.session_state.score)
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
