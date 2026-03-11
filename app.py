@@ -59,6 +59,8 @@ if "feedback" not in st.session_state:
 
 st.subheader("Make a guess")
 
+# FIX: Original equation was attempt_limit - attempts (missing +1), causing the counter to show
+# one fewer attempt than actually remaining. Added +1 to sync UI with actual state. Help with Claude Agent mode
 st.info(
     f"Guess a number between 1 and 100. "
     f"Attempts left: {attempt_limit - st.session_state.attempts + 1}"
@@ -76,7 +78,7 @@ if st.session_state.feedback:
 
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
-    st.write("Attempts:", st.session_state.attempts - 1)
+    st.write("Attempts:", st.session_state.attempts - 1)  # FIX: attempts starts at 1 and increments before processing, so -1 aligns debug count with UI. Used with Claude Agent mode.
     st.write("Score:", st.session_state.score)
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
@@ -94,6 +96,9 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# FIX: Original only reset attempts to 0 and generated a new secret with hardcoded range (1,100),
+# skipping the reset and ignoring difficulty range.
+# Fixed by resetting all session state fields. Help with Claude Agent mode.
 if new_game:
     st.session_state.attempts = 1
     st.session_state.secret = random.randint(low, high)

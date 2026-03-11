@@ -22,6 +22,8 @@ def parse_guess(raw: str):
         return False, None, "Enter a guess."
 
     try:
+        # FIX: Decimal inputs like "3.7" now truncate to int instead of being left as float.
+        # Claude Agent mode identified that float values broke downstream int comparisons.
         if "." in raw:
             value = int(float(raw))
         else:
@@ -44,11 +46,15 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        # FIX: Swapped comparison where original had guess > secret returning "Too High"/"Go HIGHER!"
+        # which was backwards. Claude Agent mode identified the inverted logic and corrected it.
         if guess < secret:
             return "Too Low", "📈 Go HIGHER!"
         else:
             return "Too High", "📉 Go LOWER!"
     except TypeError:
+        # FIX: Original used str(guess) for comparison which broke int/str equality checks.
+        # Claude Agent mode refactored both branches to cast to int for consistent comparison.
         g = int(guess)
         s = int(secret)
         if g == s:
@@ -66,6 +72,8 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
             points = 10
         return current_score + points
 
+    # FIX: Original had an even/odd branch that added +5 on even attempts, causing score to
+    # fluctuate up and down. Claude Agent mode simplified this to always subtract 5 for wrong guesses.
     if outcome in ("Too High", "Too Low"):
         return current_score - 5
 
